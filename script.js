@@ -162,13 +162,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    async function fetchImage(query) {
-        const locationLower = query.toLowerCase();
-        if (locationLower.includes('parís')) return 'https://source.unsplash.com/300x200/?paris';
-        if (locationLower.includes('londres')) return 'https://source.unsplash.com/300x200/?london';
-        if (locationLower.includes('nueva york')) return 'https://source.unsplash.com/300x200/?new york city';
-        return null;
-    }
+   async function fetchImage(query) {
+    const locationLower = query.toLowerCase();
+    if (locationLower.includes('parís')) return 'https://picsum.photos/300/200?random=1';
+    if (locationLower.includes('londres')) return 'https://picsum.photos/300/200?random=2';
+    if (locationLower.includes('nueva york')) return 'https://picsum.photos/300/200?random=3';
+    return null;
+}
 
     async function generateFictionalImage(description) {
         if (description.includes('Hogwarts')) {
