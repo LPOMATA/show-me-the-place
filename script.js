@@ -163,11 +163,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
    async function fetchImage(query) {
-    const locationLower = query.toLowerCase();
-    if (locationLower.includes('parís')) return 'https://picsum.photos/300/200?random=1';
-    if (locationLower.includes('londres')) return 'https://picsum.photos/300/200?random=2';
-    if (locationLower.includes('nueva york')) return 'https://picsum.photos/300/200?random=3';
-    return null;
+    const apiKey = "q7GEeSZ9CHeW-DAHU02Ouv78pgdpeOgukli4hLkEwyI"; // <-- ¡Pon tu clave aquí!
+    const apiUrl = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&client_id=${apiKey}&per_page=1`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data.results && data.results.length > 0) {
+            return data.results[0].urls.regular;
+        }
+        return null; // Si no hay resultados, no devuelve nada.
+    } catch (error) {
+        console.error("Error al obtener la imagen de Unsplash:", error);
+        return null;
+    }
 }
 
     async function generateFictionalImage(description) {
