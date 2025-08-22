@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function displayRealLocations(locations) {
         console.log('➡️ Función displayRealLocations iniciada.');
-        var L = window.L;
+        
         if (!map) {
             console.log('🗺️ El mapa no existe, inicializándolo...');
             map = L.map('map-container').setView([0, 0], 2);
