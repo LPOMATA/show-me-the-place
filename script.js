@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = mailtoLink;
     });
 
-    async function simulateNLPExtraction(text)  {
+    async function simulateNLPExtraction(text) {
         const lowerText = text.toLowerCase();
         let realPlaces = [];
         let fictionalPlaces = [];
@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function displayRealLocations(locations) {
         console.log('➡️ Función displayRealLocations iniciada.');
-        
         if (!map) {
             console.log('🗺️ El mapa no existe, inicializándolo...');
             map = L.map('map-container').setView([0, 0], 2);
