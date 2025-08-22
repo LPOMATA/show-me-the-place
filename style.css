@@ -1,0 +1,121 @@
+body {
+font-family: sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f4f4f4;
+color: #333;
+}
+
+header {
+background-color: #333;
+color: white;
+padding: 20px;
+text-align: center;
+}
+
+main {
+padding: 20px;
+}
+
+#input-section {
+text-align: center;
+margin-bottom: 20px;
+}
+
+#book-input {
+padding: 10px;
+width: 80%;
+max-width: 500px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 16px;
+}
+
+#search-button {
+padding: 10px 20px;
+background-color: #333;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+margin-top: 10px;
+}
+
+#results-section, #fictional-section {
+margin-top: 20px;
+text-align: center;
+}
+
+#map-container {
+height: 300px;
+width: 100%;
+max-width: 800px;
+margin: 20px auto;
+border-radius: 5px;
+}
+
+#image-gallery, #fictional-gallery {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 10px;
+margin-top: 20px;
+}
+
+#image-gallery img, #fictional-gallery img {
+max-width: 300px;
+height: auto;
+border-radius: 5px;
+box-shadow: 2px 2px 5px #888888;
+}
+
+.hidden {
+display: none;
+}
+
+footer {
+background-color: #333;
+color: white;
+text-align: center;
+padding: 10px;
+position: relative;
+}
+
+#feedback-button {
+padding: 8px 15px;
+background-color: #555;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 14px;
+margin-bottom: 10px;
+}
+
+.ad-slot {
+text-align: center;
+padding: 15px 0;
+}
+
+#latest-snaps-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.snap-item {
+    width: 150px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+.snap-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

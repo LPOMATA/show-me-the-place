@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explora los Mundos de tus Libros</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPvknYZJwVjxVby/fDGGZYfrYGaRWpkmiPzlZuW1NRJGC5Ia4eQjyIXK52lyJ+DGPjo3w=="
+          crossorigin=""/>
+</head>
+<body>
+    
+    <header>
+        <h1>Explora los Mundos de tus Libros</h1>
+        <p>Descubre los paisajes y ciudades que dan vida a tus historias favoritas.</p>
+    </header>
+
+    <main>
+        <section id="input-section">
+            <input type="text" id="book-input" placeholder="Ingresa el nombre del libro o un pasaje...">
+            <button id="search-button">Buscar Lugares</button>
+        </section>
+
+        <section id="latest-snaps" class="hidden">
+            <h3>Últimas Imágenes Exploradas:</h3>
+            <div id="latest-snaps-container"></div>
+        </section>
+
+        <section id="results-section" class="hidden">
+            <h2>Lugares Encontrados:</h2>
+            <div id="map-container"></div>
+            <div id="image-gallery"></div>
+        </section>
+
+        <section id="fictional-section" class="hidden">
+            <h2>Lugares Ficticios Imaginados:</h2>
+            <div id="fictional-gallery"></div>
+        </section>
+
+        <section id="ads-container-top" class="ad-slot">
+            </section>
+    </main>
+
+    <footer>
+        <button id="feedback-button">Enviar Feedback</button>
+        <section id="ads-container-bottom" class="ad-slot">
+            </section>
+        <p>&copy; 2023 Explora Mundos Literarios</p>
+    </footer>
+
+    
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYM8mRkwPWnqmVjv8FelVHflGVejwp2ZTmvS36KNX0rg2RyJgx5wDxnxQZHjmvcPhVAxfOyi0EjkPdgyHcQ=="
+            crossorigin=""></script>
+</body>
+</html>
