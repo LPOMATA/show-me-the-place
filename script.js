@@ -200,13 +200,13 @@ async function generateFictionalImage(description) {
 
     // Datos de imágenes incrustados (base64)
     if (lowerDescription.includes('la comarca')) {
-        return 'data:image/jpeg;base64,/9j/4AAQ...'; // Datos de la imagen de La Comarca
+        return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwclpYSUNDX1BST0ZJTEUAAQcAAAHSAAAAbGNpY3IAAABbSU5DTlMgSU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAYXBwbAAAAAAASU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAAAAAY29weXJpZ2h0AAAAbklOQ05TIEluZ2dsZXQsIEluYy4gKDIwMjUpIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIFVuYXV0aG9yaXplZCB1c2UgcyBwcm9oaWJpdGVkIGJ5IGxhdy4AAAAADGtleXdvcmRzAAAAAGluZ2dsZXQgY29sb3IgcHJvZmlsZQAAAAAAAAAAAAAA...'; // Completa la cadena base64 de La Comarca
     } else if (lowerDescription.includes('rivendel')) {
-        return 'data:image/jpeg;base64,/9j/4AAQ...'; // Datos de la imagen de Rivendel
+        return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwclpYSUNDX1BST0ZJTEUAAQcAAAHSAAAAbGNpY3IAAABbSU5DTlMgSU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAYXBwbAAAAAAASU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAAAAAY29weXJpZ2h0AAAAbklOQ05TIEluZ2dsZXQsIEluYy4gKDIwMjUpIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIFVuYXV0aG9yaXplZCB1c2UgcyBwcm9oaWJpdGVkIGJ5IGxhdy4AAAAADGtleXdvcmRzAAAAAGluZ2dsZXQgY29sb3IgcHJvZmlsZQAAAAAAAAAAAAAA...'; // Completa la cadena base64 de Rivendel
     } else if (lowerDescription.includes('castillo de hogwarts')) {
-        return 'data:image/jpeg;base64,/9j/4AAQ...'; // Datos de la imagen de Hogwarts
+        return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwclpYSUNDX1BST0ZJTEUAAQcAAAHSAAAAbGNpY3IAAABbSU5DTlMgSU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAYXBwbAAAAAAASU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAAAAAY29weXJpZ2h0AAAAbklOQ05TIEluZ2dsZXQsIEluYy4gKDIwMjUpIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIFVuYXV0aG9yaXplZCB1c2UgcyBwcm9oaWJpdGVkIGJ5IGxhdy4AAAAADGtleXdvcmRzAAAAAGluZ2dsZXQgY29sb3IgcHJvZmlsZQAAAAAAAAAAAAAA...'; // Completa la cadena base64 de Hogwarts
     } else if (lowerDescription.includes('narnia')) {
-        return 'data:image/jpeg;base64,/9j/4AAQ...'; // Datos de la imagen de Narnia
+        return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwclpYSUNDX1BST0ZJTEUAAQcAAAHSAAAAbGNpY3IAAABbSU5DTlMgSU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAYXBwbAAAAAAASU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAAAAAY29weXJpZ2h0AAAAbklOQ05TIEluZ2dsZXQsIEluYy4gKDIwMjUpIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIFVuYXV0aG9yaXplZCB1c2UgcyBwcm9oaWJpdGVkIGJ5IGxhdy4AAAAADGtleXdvcmRzAAAAAGluZ2dsZXQgY29sb3IgcHJvZmlsZQAAAAAAAAAAAAAA...'; // Completa la cadena base64 de Narnia
     }
 
     // Para cualquier otro lugar ficticio, aún usamos un servicio de prueba
