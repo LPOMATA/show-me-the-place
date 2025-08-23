@@ -198,18 +198,18 @@ document.addEventListener('DOMContentLoaded', () => {
 async function generateFictionalImage(description) {
     const lowerDescription = description.toLowerCase();
 
-    // Final, permanent links for fictional locations
+    // URLs permanentes y estables para los lugares ficticios
     if (lowerDescription.includes('la comarca')) {
-        return 'https://i.imgur.com/uG9XF2i.jpeg';
+        return 'https://i.ibb.co/L9d0m7y/la-comarca.jpg';
     } else if (lowerDescription.includes('rivendel')) {
-        return 'https://i.imgur.com/g8o20q4.jpeg';
+        return 'https://i.ibb.co/31z848W/rivendel.jpg';
     } else if (lowerDescription.includes('castillo de hogwarts')) {
-        return 'https://i.imgur.com/o2x38qA.jpeg';
+        return 'https://i.ibb.co/VMy4Pj7/hogwarts-castle.jpg';
     } else if (lowerDescription.includes('narnia')) {
-        return 'https://i.imgur.com/X4J6V8v.jpeg';
+        return 'https://i.ibb.co/BPL241W/narnia-wardrobe.jpg';
     }
 
-    // For any other fictional location, use the reliable placeholder service
+    // Para cualquier otro lugar ficticio, aún usamos un servicio de prueba
     const encodedText = encodeURIComponent(description);
     return `https://placehold.co/300x200?text=${encodedText}`;
 }
