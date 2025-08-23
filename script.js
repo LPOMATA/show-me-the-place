@@ -198,18 +198,18 @@ document.addEventListener('DOMContentLoaded', () => {
 async function generateFictionalImage(description) {
     const lowerDescription = description.toLowerCase();
 
-    // Rutas locales a las imágenes en la carpeta 'img'
+    // Datos de imágenes incrustados (base64)
     if (lowerDescription.includes('la comarca')) {
-        return 'img/la-comarca.jpg';
+        return 'data:image/jpeg;base64,/9j/4AAQ...'; // Datos de la imagen de La Comarca
     } else if (lowerDescription.includes('rivendel')) {
-        return 'img/rivendel.jpg';
+        return 'data:image/jpeg;base64,/9j/4AAQ...'; // Datos de la imagen de Rivendel
     } else if (lowerDescription.includes('castillo de hogwarts')) {
-        return 'img/hogwarts-castle.jpg';
+        return 'data:image/jpeg;base64,/9j/4AAQ...'; // Datos de la imagen de Hogwarts
     } else if (lowerDescription.includes('narnia')) {
-        return 'img/narnia-wardrobe.jpg';
+        return 'data:image/jpeg;base64,/9j/4AAQ...'; // Datos de la imagen de Narnia
     }
 
-    // Si no se encuentra un lugar ficticio predefinido, aún usamos un servicio de prueba
+    // Para cualquier otro lugar ficticio, aún usamos un servicio de prueba
     const encodedText = encodeURIComponent(description);
     return `https://placehold.co/300x200?text=${encodedText}`;
 }
