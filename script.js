@@ -197,19 +197,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function generateFictionalImage(description) {
     const lowerDescription = description.toLowerCase();
-    
-    // Aquí usamos URLs de imágenes generadas para cada lugar ficticio
+
+    // URLs permanentes para los lugares ficticios
     if (lowerDescription.includes('la comarca')) {
-        return 'https://images.unsplash.com/photo-1628795556276-88d40a5a0445?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop';
+        return 'https://i.imgur.com/h5r8S3t.jpeg';
     } else if (lowerDescription.includes('rivendel')) {
-        return 'https://images.unsplash.com/photo-1612445173775-684a8677c7d4?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop';
+        return 'https://i.imgur.com/vHqQ94s.jpeg';
     } else if (lowerDescription.includes('castillo de hogwarts')) {
-        return 'https://images.unsplash.com/photo-1541817454-942f741639d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNDk0NTZ8MHwxfHNlYXJjaHwyMHx8Y2FzdGxlJTIwb24lMjBhJTIwbGFrZXxlbnwwfHx8fDE3MjQyNjg4MzJ8MA&ixlib=rb-4.0.3&q=80&w=400';
+        return 'https://i.imgur.com/1e2xQ3u.jpeg';
     } else if (lowerDescription.includes('narnia')) {
-        return 'https://images.unsplash.com/photo-1628109675971-d64e16d44697?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop';
+        return 'https://i.imgur.com/x0e6h7a.jpeg';
     }
-    
-    // Si no se encuentra un lugar ficticio predefinido, aún usamos el servicio de prueba
+
+    // Para cualquier otro lugar ficticio, aún usamos un servicio de prueba
     const encodedText = encodeURIComponent(description);
     return `https://placehold.co/300x200?text=${encodedText}`;
 }
