@@ -200,13 +200,13 @@ async function generateFictionalImage(description) {
 
     // Final, permanent links for fictional locations
     if (lowerDescription.includes('la comarca')) {
-        return 'https://i.ibb.co/L9d0m7y/la-comarca.jpg';
+        return 'https://ibb.co/p2Q5Z0L';
     } else if (lowerDescription.includes('rivendel')) {
-        return 'https://i.ibb.co/31z848W/rivendel.jpg';
+        return 'https://ibb.co/f4b1K4v';
     } else if (lowerDescription.includes('castillo de hogwarts')) {
-        return 'https://i.ibb.co/VMy4Pj7/hogwarts-castle.jpg';
+        return 'https://ibb.co/z5p5D2M';
     } else if (lowerDescription.includes('narnia')) {
-        return 'https://i.ibb.co/BPL241W/narnia-wardrobe.jpg';
+        return 'https://ibb.co/31C7T2Q';
     }
 
     // For any other fictional location, use the reliable placeholder service
