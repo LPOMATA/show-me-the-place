@@ -52,28 +52,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function simulateNLPExtraction(text) {
-        const lowerText = text.toLowerCase();
-        let realPlaces = [];
-        let fictionalPlaces = [];
+    const lowerText = text.toLowerCase();
+    let realPlaces = [];
+    let fictionalPlaces = [];
 
-        if (lowerText.includes('paris')) {
-            realPlaces.push('París, Francia');
+    // Esta es una simulación de NLP. En un proyecto real, usaríamos un modelo de IA.
+    const potentialPlaces = [
+        'parís', 'londres', 'nueva york', 'roma', 'tokio', 'san francisco',
+        'castillo de hogwarts', 'la comarca', 'rivendel', 'narnia'
+    ];
+
+    potentialPlaces.forEach(place => {
+        if (lowerText.includes(place)) {
+            // Decidimos si el lugar es real o ficticio
+            if (['castillo de hogwarts', 'la comarca', 'rivendel', 'narnia'].includes(place)) {
+                fictionalPlaces.push(place);
+            } else {
+                realPlaces.push(place);
+            }
         }
-        if (lowerText.includes('londres')) {
-            realPlaces.push('Londres, Reino Unido');
-        }
-        if (lowerText.includes('nueva york')) {
-            realPlaces.push('Nueva York, EE.UU.');
-        }
-        
-        if (lowerText.includes('castillo') && lowerText.includes('botes') && lowerText.includes('lago')) {
-            fictionalPlaces.push('El Castillo de Hogwarts');
-        } else if (lowerText.includes('shire') || lowerText.includes('rivendel')) {
-            fictionalPlaces.push('La Comarca', 'Rivendel');
-        }
-        
-        return { real: realPlaces, fictional: fictionalPlaces };
-    }
+    });
+
+    return { real: realPlaces, fictional: fictionalPlaces };
+}
 
     async function displayRealLocations(locations) {
         console.log('➡️ Función displayRealLocations iniciada.');
@@ -155,12 +156,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function getCoordinates(location) {
-        const locationLower = location.toLowerCase();
-        if (locationLower.includes('parís')) return { latitude: 48.8566, longitude: 2.3522 };
-        if (locationLower.includes('londres')) return { latitude: 51.5074, longitude: 0.1278 };
-        if (locationLower.includes('nueva york')) return { latitude: 40.7128, longitude: -74.0060 };
+    const apiUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=json&limit=1`;
+    
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        if (data.length > 0) {
+            const result = data[0];
+            return {
+                latitude: parseFloat(result.lat),
+                longitude: parseFloat(result.lon)
+            };
+        } else {
+            console.warn(`No se encontraron coordenadas para: ${location}`);
+            return null;
+        }
+    } catch (error) {
+        console.error("Error al obtener las coordenadas:", error);
         return null;
     }
+}
 
    async function fetchImage(query) {
     const apiKey = "q7GEeSZ9CHeW-DAHU02Ouv78pgdpeOgukli4hLkEwyI"; // <-- ¡Pon tu clave aquí!
