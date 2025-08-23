@@ -19,25 +19,43 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('➡️ Clic en el botón detectado. Iniciando búsqueda...');
         const query = bookInput.value.trim();
         if (query) {
-            console.log('🔎 Buscando lugares en:', query);
+            console.log('🔎 Enviando consulta al backend:', query);
 
-            const extractedLocations = await simulateNLPExtraction(query);
-            console.log('📦 Lugares extraídos (simulado):', extractedLocations);
+            try {
+                // Aquí es donde hacemos la llamada a tu nuevo servidor en localhost
+                const response = await fetch('http://localhost:3000/search-places', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query: query }),
+                });
 
-            if (extractedLocations.real.length > 0) {
-                console.log('🗺️ Mostrando lugares reales en el mapa...');
-                displayRealLocations(extractedLocations.real);
-                resultsSection.classList.remove('hidden');
-            } else {
-                resultsSection.classList.add('hidden');
-            }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-            if (extractedLocations.fictional.length > 0) {
-                console.log('🏰 Mostrando lugares ficticios generados...');
-                displayFictionalLocations(extractedLocations.fictional);
-                fictionalSection.classList.remove('hidden');
-            } else {
-                fictionalSection.classList.add('hidden');
+                const data = await response.json();
+                console.log('📦 Datos recibidos del backend:', data);
+
+                if (data.real.length > 0) {
+                    console.log('🗺️ Mostrando lugares reales en el mapa...');
+                    displayRealLocations(data.real);
+                    resultsSection.classList.remove('hidden');
+                } else {
+                    resultsSection.classList.add('hidden');
+                }
+
+                if (data.fictional.length > 0) {
+                    console.log('🏰 Mostrando lugares ficticios generados...');
+                    displayFictionalLocations(data.fictional);
+                    fictionalSection.classList.remove('hidden');
+                } else {
+                    fictionalSection.classList.add('hidden');
+                }
+            } catch (error) {
+                console.error('❌ Error al conectar con el backend:', error);
+                alert('No se pudo conectar con el servidor. Asegúrate de que tu backend esté ejecutándose.');
             }
         } else {
             alert('Por favor, ingresa el nombre de un libro o un pasaje.');
@@ -50,31 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const mailtoLink = `mailto:lpomata@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         window.location.href = mailtoLink;
     });
-
-    async function simulateNLPExtraction(text) {
-    const lowerText = text.toLowerCase();
-    let realPlaces = [];
-    let fictionalPlaces = [];
-
-    // Esta es una simulación de NLP. En un proyecto real, usaríamos un modelo de IA.
-    const potentialPlaces = [
-        'parís', 'londres', 'nueva york', 'roma', 'tokio', 'san francisco',
-        'castillo de hogwarts', 'la comarca', 'rivendel', 'narnia'
-    ];
-
-    potentialPlaces.forEach(place => {
-        if (lowerText.includes(place)) {
-            // Decidimos si el lugar es real o ficticio
-            if (['castillo de hogwarts', 'la comarca', 'rivendel', 'narnia'].includes(place)) {
-                fictionalPlaces.push(place);
-            } else {
-                realPlaces.push(place);
-            }
-        }
-    });
-
-    return { real: realPlaces, fictional: fictionalPlaces };
-}
 
     async function displayRealLocations(locations) {
         console.log('➡️ Función displayRealLocations iniciada.');
@@ -94,27 +87,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         imageGallery.innerHTML = '';
         for (const location of locations) {
-            console.log(`➡️ Procesando lugar: ${location}`);
+            console.log(`➡️ Procesando lugar: ${location.name}`);
             try {
-                const coordinates = await getCoordinates(location);
-                if (coordinates) {
-                    console.log('📍 Coordenadas obtenidas:', coordinates);
-                    const marker = L.marker([coordinates.latitude, coordinates.longitude]).addTo(map);
-                    marker.bindPopup(location).openPopup();
-                    map.setView([coordinates.latitude, coordinates.longitude], 8);
+                const marker = L.marker([location.lat, location.lon]).addTo(map);
+                marker.bindPopup(location.name).openPopup();
+                map.setView([location.lat, location.lon], 8);
 
-                    const imageUrl = await fetchImage(location);
-                    if (imageUrl) {
-                        console.log('🖼️ Imagen obtenida:', imageUrl);
-                        const imgElement = document.createElement('img');
-                        imgElement.src = imageUrl;
-                        imgElement.alt = `Imagen de ${location}`;
-                        imageGallery.appendChild(imgElement);
-                        addSnapshot(imageUrl);
-                    }
+                if (location.imageUrl) {
+                    console.log('🖼️ Imagen obtenida:', location.imageUrl);
+                    const imgElement = document.createElement('img');
+                    imgElement.src = location.imageUrl;
+                    imgElement.alt = `Imagen de ${location.name}`;
+                    imageGallery.appendChild(imgElement);
+                    addSnapshot(location.imageUrl);
                 }
             } catch (error) {
-                console.error(`❌ Error al procesar ${location}:`, error);
+                console.error(`❌ Error al procesar ${location.name}:`, error);
             }
         }
     }
@@ -123,15 +111,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('➡️ Función displayFictionalLocations iniciada.');
         fictionalGallery.innerHTML = '';
         for (const location of locations) {
-            console.log(`🏰 Procesando lugar ficticio: ${location}`);
-            const fictionalImageUrl = await generateFictionalImage(location);
-            if (fictionalImageUrl) {
-                console.log('🖼️ Imagen ficticia obtenida:', fictionalImageUrl);
+            console.log(`🏰 Procesando lugar ficticio: ${location.name}`);
+            if (location.imageUrl) {
+                console.log('🖼️ Imagen ficticia obtenida:', location.imageUrl);
                 const imgElement = document.createElement('img');
-                imgElement.src = fictionalImageUrl;
-                imgElement.alt = `Imagen de ${location} (ficticio)`;
+                imgElement.src = location.imageUrl;
+                imgElement.alt = `Imagen de ${location.name} (ficticio)`;
                 fictionalGallery.appendChild(imgElement);
-                addSnapshot(fictionalImageUrl);
+                addSnapshot(location.imageUrl);
             }
         }
     }
@@ -154,62 +141,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         latestSnapsSection.classList.remove('hidden');
     }
-
-    async function getCoordinates(location) {
-    const apiUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=json&limit=1`;
-    
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.length > 0) {
-            const result = data[0];
-            return {
-                latitude: parseFloat(result.lat),
-                longitude: parseFloat(result.lon)
-            };
-        } else {
-            console.warn(`No se encontraron coordenadas para: ${location}`);
-            return null;
-        }
-    } catch (error) {
-        console.error("Error al obtener las coordenadas:", error);
-        return null;
-    }
-}
-
-   async function fetchImage(query) {
-    const apiKey = "q7GEeSZ9CHeW-DAHU02Ouv78pgdpeOgukli4hLkEwyI"; // <-- ¡Pon tu clave aquí!
-    const apiUrl = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&client_id=${apiKey}&per_page=1`;
-
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        if (data.results && data.results.length > 0) {
-            return data.results[0].urls.regular;
-        }
-        return null; // Si no hay resultados, no devuelve nada.
-    } catch (error) {
-        console.error("Error al obtener la imagen de Unsplash:", error);
-        return null;
-    }
-}
-
-async function generateFictionalImage(description) {
-    const lowerDescription = description.toLowerCase();
-
-    // Datos de imágenes incrustados (base64)
-    if (lowerDescription.includes('la comarca')) {
-        return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwclpYSUNDX1BST0ZJTEUAAQcAAAHSAAAAbGNpY3IAAABbSU5DTlMgSU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAYXBwbAAAAAAASU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAAAAAY29weXJpZ2h0AAAAbklOQ05TIEluZ2dsZXQsIEluYy4gKDIwMjUpIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIFVuYXV0aG9yaXplZCB1c2UgcyBwcm9oaWJpdGVkIGJ5IGxhdy4AAAAADGtleXdvcmRzAAAAAGluZ2dsZXQgY29sb3IgcHJvZmlsZQAAAAAAAAAAAAAA...';
-    } else if (lowerDescription.includes('rivendel')) {
-        return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwclpYSUNDX1BST0ZJTEUAAQcAAAHSAAAAbGNpY3IAAABbSU5DTlMgSU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAYXBwbAAAAAAASU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAAAAAY29weXJpZ2h0AAAAbklOQ05TIEluZ2dsZXQsIEluYy4gKDIwMjUpIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIFVuYXV0aG9yaXplZCB1c2UgcyBwcm9oaWJpdGVkIGJ5IGxhdy4AAAAADGtleXdvcmRzAAAAAGluZ2dsZXQgY29sb3IgcHJvZmlsZQAAAAAAAAAAAAAA...';
-    } else if (lowerDescription.includes('castillo de hogwarts')) {
-        return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwclpYSUNDX1BST0ZJTEUAAQcAAAHSAAAAbGNpY3IAAABbSU5DTlMgSU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAYXBwbAAAAAAASU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAAAAAY29weXJpZ2h0AAAAbklOQ05TIEluZ2dsZXQsIEluYy4gKDIwMjUpIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIFVuYXV0aG9yaXplZCB1c2UgcyBwcm9oaWJpdGVkIGJ5IGxhdy4AAAAADGtleXdvcmRzAAAAAGluZ2dsZXQgY29sb3IgcHJvZmlsZQAAAAAAAAAAAAAA...';
-    } else if (lowerDescription.includes('narnia')) {
-        return 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwclpYSUNDX1BST0ZJTEUAAQcAAAHSAAAAbGNpY3IAAABbSU5DTlMgSU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAYXBwbAAAAAAASU5DTlMgSW5nZ2xldCwgSW5jLiAod3d3LmluZ2dsZXQuY29tKSAyMDI1AAAAAAAAY29weXJpZ2h0AAAAbklOQ05TIEluZ2dsZXQsIEluYy4gKDIwMjUpIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIFVuYXV0aG9yaXplZCB1c2UgcyBwcm9oaWJpdGVkIGJ5IGxhdy4AAAAADGtleXdvcmRzAAAAAGluZ2dsZXQgY29sb3IgcHJvZmlsZQAAAAAAAAAAAAAA...';
-    }
-
-    const encodedText = encodeURIComponent(description);
-    return `https://placehold.co/300x200?text=${encodedText}`;
-}
 });
