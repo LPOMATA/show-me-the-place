@@ -119,3 +119,36 @@ padding: 15px 0;
     height: 100%;
     object-fit: cover;
 }
+
+#latest-snaps-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.snap-item {
+    width: 150px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+.snap-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#book-cover-container {
+    text-align: center;
+    margin-top: 20px;
+}
+#book-cover-container img {
+    max-width: 200px;
+    height: auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
