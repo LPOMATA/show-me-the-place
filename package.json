@@ -1,0 +1,14 @@
+{
+  "name": "show-me-the-place",
+  "version": "1.0.0",
+  "description": "A web app that shows real and fictional places from books.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  }
+}
