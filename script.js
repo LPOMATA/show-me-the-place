@@ -195,10 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
 
-    async function generateFictionalImage(description) {
-        if (description.includes('Hogwarts')) {
-            return 'https://images.unsplash.com/photo-1541817454-942f741639d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNDk0NTZ8MHwxfHNlYXJjaHwyMHx8Y2FzdGxlJTIwb24lMjBhJTIwbGFrZXxlbnwwfHx8fDE3MjQyNjg4MzJ8MA&ixlib=rb-4.0.3&q=80&w=400';
-        }
-        return `https://via.placeholder.com/300x200?text=${encodeURIComponent(description)}`;
+async function generateFictionalImage(description) {
+    // Si la descripción contiene "Hogwarts", usamos una imagen de ejemplo
+    if (description.toLowerCase().includes('hogwarts')) {
+        return 'https://images.unsplash.com/photo-1541817454-942f741639d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNDk0NTZ8MHwxfHNlYXJjaHwyMHx8Y2FzdGxlJTIwb24lMjBhJTIwbGFrZXxlbnwwfHx8fDE3MjQyNjg4MzJ8MA&ixlib=rb-4.0.3&q=80&w=400';
     }
+    // Para cualquier otro lugar ficticio, usamos el nuevo servicio de prueba
+    const encodedText = encodeURIComponent(description);
+    return `https://placehold.co/300x200?text=${encodedText}`;
+}
 });
