@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function generateFictionalImage(description) {
     const lowerDescription = description.toLowerCase();
 
-    // URLs permanentes y estables para los lugares ficticios
+    // Final, permanent links for fictional locations
     if (lowerDescription.includes('la comarca')) {
         return 'https://i.ibb.co/L9d0m7y/la-comarca.jpg';
     } else if (lowerDescription.includes('rivendel')) {
@@ -209,7 +209,7 @@ async function generateFictionalImage(description) {
         return 'https://i.ibb.co/BPL241W/narnia-wardrobe.jpg';
     }
 
-    // Para cualquier otro lugar ficticio, aún usamos un servicio de prueba
+    // For any other fictional location, use the reliable placeholder service
     const encodedText = encodeURIComponent(description);
     return `https://placehold.co/300x200?text=${encodedText}`;
 }
