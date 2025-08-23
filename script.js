@@ -196,21 +196,21 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 async function generateFictionalImage(description) {
-const lowerDescription = description.toLowerCase();
+    const lowerDescription = description.toLowerCase();
 
-// URLs permanentes a imágenes generadas
-if (lowerDescription.includes('la comarca')) {
-    return '[https://i.ibb.co/709xRKy/la-comarca.jpg](https://i.ibb.co/709xRKy/la-comarca.jpg)';
-} else if (lowerDescription.includes('rivendel')) {
-    return '[https://i.ibb.co/4d51hVg/rivendel.jpg](https://i.ibb.co/4d51hVg/rivendel.jpg)';
-} else if (lowerDescription.includes('castillo de hogwarts')) {
-    return '[https://i.ibb.co/5W7Pz9M/hogwarts.jpg](https://i.ibb.co/5W7Pz9M/hogwarts.jpg)';
-} else if (lowerDescription.includes('narnia')) {
-    return '[https://i.ibb.co/9sqG08G/narnia.jpg](https://i.ibb.co/9sqG08G/narnia.jpg)';
-}
+    // URLs permanentes a imágenes generadas
+    if (lowerDescription.includes('la comarca')) {
+        return 'https://i.ibb.co/709xRKy/la-comarca.jpg';
+    } else if (lowerDescription.includes('rivendel')) {
+        return 'https://i.ibb.co/4d51hVg/rivendel.jpg';
+    } else if (lowerDescription.includes('castillo de hogwarts')) {
+        return 'https://i.ibb.co/5W7Pz9M/hogwarts.jpg';
+    } else if (lowerDescription.includes('narnia')) {
+        return 'https://i.ibb.co/9sqG08G/narnia.jpg';
+    }
 
-// Para cualquier otro lugar ficticio, aún usamos un servicio de prueba
-const encodedText = encodeURIComponent(description);
-return \`https://placehold.co/300x200?text=\${encodedText}\`;
+    // Para cualquier otro lugar ficticio, aún usamos un servicio de prueba
+    const encodedText = encodeURIComponent(description);
+    return `https://placehold.co/300x200?text=${encodedText}`;
 }
 });
